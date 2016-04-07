@@ -1,4 +1,12 @@
- <!DOCTYPE html>
+<?php 
+  include "controller/rekam_medis.php";
+
+  if (!empty($_POST)) {
+      postPasien($_POST);
+  }
+?>
+
+<!DOCTYPE html>
 <html lang="en" class="">
 <head>
   <meta charset="utf-8" />
@@ -165,6 +173,8 @@
                     <select name="jenis">
                       <option value="nama_pasien">Nama Pasien</option>
                       <option value="id_pasien">ID Pasien</option>
+                      <option value="golongan_darah">Golongan Darah</option>
+                      <option value="jenis_kelamin">Jenis Kelamin</option>
                       <option value="alamat">Alamat</option>
                       <option value="no_telp">No. Telpon</option>
                     </select>
@@ -174,7 +184,6 @@
                     <div class="table-responsive">
                     
                     <?php
-                      include "controller/rekam_medis.php";
                       $result = getPasien();
 
                       if ($result->num_rows > 0) {
@@ -185,8 +194,11 @@
                               <tr>
                                 <th  style="width:13%;text-align:center;">ID Pasien</th>
                                 <th  style="width:20%;text-align:center;">Nama Pasien</th>
+                                <th  style="width:10%;text-align:center;">Jenis Kelamin</th>
+                                <th  style="width:15%;text-align:center;">Golongan Darah</th>
                                 <th  style="width:30%;text-align:center;">Alamat</th>
                                 <th  style="width:20%;text-align:center;">No. Telpon</th>
+
                                 <th  style="width:5%"></th>
                               </tr>
                             </thead>
@@ -198,6 +210,8 @@
                               <tr>
                                 <th  style="text-align:center;font-weight:normal">'.$row["id_pasien"].'</th>
                                 <th  style="text-align:center;font-weight:normal">'.$row["nama_pasien"].'</th>
+                                <th  style="text-align:center;font-weight:normal">'.$row["jenis_kelamin"].'</th>
+                                <th  style="text-align:center;font-weight:normal">'.$row["golongan_darah"].'</th>
                                 <th  style="text-align:center;font-weight:normal">'.$row["alamat"].'</th>
                                 <th  style="text-align:center;font-weight:normal">'.$row["no_telp"].'</th>
                                 <th  style="font-weight:normal;"><a href="formpasien.php?id_pasien='. $row["id_pasien"].'">Edit</a></th>

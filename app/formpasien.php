@@ -169,11 +169,52 @@
 <div class="wrapper-lg bg-light" ng-controller="FormDemoCtrl">
   <div class="panel panel-default">
     <div class="panel-body">
-      <form action="permohonan.php" class="form-horizontal" method="post">        
+      <form action="daftarpasien.php" class="form-horizontal" method="post">        
         <div class="form-group">
+          <input type="hidden" name="IdPasien" value="<?php echo $id_pasien ?>">
           <label  class="col-sm-2 control-label" for="input-id-1">Nama Pasien</label>
           <div class="col-sm-10">
             <input type="text" class="form-control" name="NamaPasien" value="<?php echo $data['nama_pasien']?>" required>
+          </div>
+        </div>
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Jenis Kelamin</label>
+          <div class="col-sm-10">
+            <div class="radio" >
+              <label style="margin-right:15px">
+                <input type="radio" id="optionsRadios1" name="JenisKelamin" value="L" required>
+                Laki-laki     
+              </label>
+              <label>
+                <input type="radio" id="optionsRadios2" name="JenisKelamin" value="P">
+                Perempuan
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">Golongan Darah</label>
+          <div class="col-sm-10">
+            <div class="radio" >
+              <label style="margin-right:15px">
+                <input type="radio" id="optionsRadios1" name="GolonganDarah" value="A" required>
+                A
+              </label>
+              <label style="margin-right:15px">
+                <input type="radio" id="optionsRadios2" name="GolonganDarah" value="B">
+                B
+              </label>
+               <label style="margin-right:15px">
+                <input type="radio" id="optionsRadios3" name="GolonganDarah" value="AB">
+                AB
+              </label>
+               <label>
+                <input type="radio" id="optionsRadios4" name="GolonganDarah" value="O">
+                O
+              </label>
+            </div>
           </div>
         </div>
         <div class="line line-dashed b-b line-lg pull-in"></div>

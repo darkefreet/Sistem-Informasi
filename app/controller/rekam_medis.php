@@ -1,13 +1,10 @@
 <?php
 
-	function create(){
-		include "controller/config.php";
-		$conn = connect_database();      
-	}
+	include "controller/config.php";
+	$conn = connect_database();      
+
 
 	function read(){
-		include "controller/config.php";
-		$conn = connect_database();
 		$sql = "SELECT * FROM `pengobatan`";
 		$results = mysqli_query($conn,$sql);
 		$rows = array();
@@ -18,8 +15,8 @@
 	}
 
 	function readPasien($id){
-		include "controller/config.php";
-		$conn = connect_database();
+		global $conn;
+
 		$pasien = "SELECT * FROM pasien WHERE id_pasien=$id";
 		$rq = mysqli_query($conn, $pasien);
 
@@ -28,8 +25,8 @@
 	}
 
 	function getPasien() {
-		include "controller/config.php";
-		$conn = connect_database();
+		global $conn;
+
 		if (isset($_GET["search"])){
             $search = $_GET["search"];
             $jenis = $_GET["jenis"];
@@ -40,6 +37,34 @@
 
         $result = $conn->query($sql);
         return $result;
+	}
+
+	function postPasien($data)
+	{
+		global $conn;
+
+		if ($data['IdPasien'] == '')
+		{
+			//create new permohonan
+			$pasien = "INSERT INTO pasien (nama_pasien, jenis_kelamin, golongan_darah, alamat, no_telp)
+				VALUES ('$data[NamaPasien]', '$data[JenisKelamin]', '$data[GolonganDarah]', '$data[Alamat]','$data[NoTelpon]')";
+		} 
+		else 
+		{
+			//update permohonan
+			$pasien = "UPDATE pasien
+				SET
+					nama_pasien='$data[NamaPasien]',
+					jenis_kelamin='$data[JenisKelamin]',
+					golongan_darah='$data[GolonganDarah]',
+					alamat='$data[Alamat]',
+					no_telp='$data[NoTelpon]'
+				WHERE
+					id_pasien = $data[IdPasien]";
+		}      
+
+		$q = mysqli_query($conn, $pasien);
+		return $q;
 	}
 
 
