@@ -80,17 +80,17 @@
             <h1 class="m-n font-semibold h4 text-grey padder">Riwayat Pasien</h1>
           </div>
 
-          <?php  $result = json_decode(read($id_pasien),true); ?>
+          <?php  $result = readPasien($id_pasien); ?>
           <div class="wrapper-lg">
             <div class="row">
               <div class="col-md-12">
                 <div class="panel panel-default">
                   <div class="panel-heading font-semibold">
-                      Nama : <?php echo $result[0]['nama_pasien']?></br>
-                      Jenis Kelamin : <?php echo $result[0]['jenis_kelamin']?></br>
-                      Golongan Darah : <?php echo $result[0]['golongan_darah']?></br>
-                      Alamat : <?php echo $result[0]['alamat']?></br>
-                      No. Telpon : <?php echo $result[0]['no_telp']?></br>
+                      Nama : <?php echo $result['nama_pasien']?></br>
+                      Jenis Kelamin : <?php echo $result['jenis_kelamin']?></br>
+                      Golongan Darah : <?php echo $result['golongan_darah']?></br>
+                      Alamat : <?php echo $result['alamat']?></br>
+                      No. Telpon : <?php echo $result['no_telp']?></br>
                   </div>
                   <div class="panel-body">
                     <div class="col-sm-12 table-responsive">
@@ -107,7 +107,9 @@
                       </thead>
                       <tbody>
                         <?php
-                          foreach ($result as $row) {
+                          $results = json_decode(read($id_pasien),true);
+                          if($results){
+                            foreach ($results as $row) {
                             echo'
                               <tr>
                                 <td>'.$row["id_rekam"].'</td>
@@ -119,6 +121,8 @@
                               </tr>
                               ';
                           }
+                          }
+                          
                         ?>
                       </tbody>
                     </table>

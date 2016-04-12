@@ -6,11 +6,13 @@
 
 	function read($id){
 		global $conn;
-		$sql = "SELECT * FROM `pasien` NATURAL JOIN `pengobatan` WHERE id_pasien=$id";
+		$sql = "SELECT * FROM `pengobatan` WHERE id_pasien=$id";
 		$results = mysqli_query($conn,$sql);
 		$rows = array();
-		while($r = mysqli_fetch_assoc($results)){
-			$rows[]=$r;
+		if($results){
+			while($r = mysqli_fetch_assoc($results)){
+				$rows[]=$r;
+			}
 		}
 		return json_encode($rows);
 	}
