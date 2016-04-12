@@ -4,9 +4,9 @@
 	$conn = connect_database();      
 
 
-	function read(){
+	function read($id){
 		global $conn;
-		$sql = "SELECT * FROM `pengobatan`";
+		$sql = "SELECT * FROM `pasien` NATURAL JOIN `pengobatan` WHERE id_pasien=$id";
 		$results = mysqli_query($conn,$sql);
 		$rows = array();
 		while($r = mysqli_fetch_assoc($results)){
@@ -66,19 +66,6 @@
 
 		$q = mysqli_query($conn, $pasien);
 		return $q;
-	}
-
-
-	function update($array){
-		include "controller/config.php";
-		$conn = connect_database();
-
-	}
-
-	function delete($id_pasien, $id_rekam){
-		include "controller/config.php";
-		$conn = connect_database();
-
 	}
 
 ?>

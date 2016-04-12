@@ -118,7 +118,7 @@
                           <th>Nama Obat</th>
                           <th>Harga</th>
                           <th>Deskripsi</th>
-                          <th style="width:30px;"></th>
+                          <th style="width:5%;"></th>
                         </tr>
                       </thead>
                       <tbody>
