@@ -1,6 +1,6 @@
 <?php
-	include "controller/rekam_medis.php";
+	include "controller/obat.php";
 
-	$result = readPasien(2);
+	$result = read();
 	echo $result;
 ?>

@@ -1,9 +1,10 @@
 <?php 
-  include "controller/rekam_medis.php";
+  include "controller/obat.php";
 
   if (!empty($_POST)) {
-      postPasien($_POST);
+      postObat($_POST);
   }
+
 ?>
 
 <!DOCTYPE html>
@@ -42,13 +43,13 @@
                   <span class="font-bold">Home</span>
                 </a>               
               </li>
-              <li class="active">
+              <li>
                 <a href="daftarpasien.php" class="text-dark-grey" >      
                   <i class="icon-bdg_dashboard icon-grey"></i>
                   <span class="font-bold">Daftar Pasien</span>
                 </a>               
               </li>
-              <li>
+              <li class="active">
                 <a href="daftarobat.php" class="text-dark-grey" >      
                   <i class="icon-bdg_dashboard icon-grey"></i>
                   <span class="font-bold">Daftar Obat</span>
@@ -75,12 +76,12 @@
                   <i class="icon-bdg_expand2 text-active"></i>
                 </a>   </li>
                 <li><a href>Home</a></li>                
-                <li class="active"><i class="fa fa-angle-right"></i>Daftar Pasien</li>
+                <li class="active"><i class="fa fa-angle-right"></i>Daftar Obat</li>
               </ul>
           </div>
 
           <div class="bg-light lter b-b wrapper-md padder-md">
-            <h1 class="m-n font-semibold h4 text-grey padder">Daftar Pasien</h1>
+            <h1 class="m-n font-semibold h4 text-grey padder">Daftar Obat</h1>
           </div>
 
           <div class="wrapper-lg">
@@ -88,68 +89,47 @@
               <div class="col-md-12">
                 <div class="panel panel-default">
                   <div class="panel-heading font-semibold">
-                    Pasien
+                    Obat
                   </div>
                   <div class="panel-body">
                   <form>
                     Search: 
                     <input type="text" name="search" class= "input-sm form-control w-sm inline v-middle"placeholder="Ketik disini">
                     <select name="jenis" class="input-sm form-control w-sm inline v-middle">
-                      <option value="nama_pasien">Nama Pasien</option>
-                      <option value="id_pasien">ID Pasien</option>
-                      <option value="golongan_darah">Golongan Darah</option>
-                      <option value="jenis_kelamin">Jenis Kelamin</option>
-                      <option value="alamat">Alamat</option>
-                      <option value="no_telp">No. Telpon</option>
+                      <option value="nama_obat">Nama Obat</option>
+                      <option value="harga_obat">Harga</option>
+                      <option value="deskripsi">Deskripsi</option>
                     </select>
                     <button class= "btn btn-sm btn-default">Go</button>
                   </form> 
                   <br>
-                    <div class="table-responsive">
                     
-                    <?php
-                      $result = getPasien();
-
-                      if ($result->num_rows > 0) {
-                        echo'
-                          <table class="table table-striped b-t b-b">
-                          
-                            <thead>
-                              <tr>
-                                <th  style="width:13%;text-align:center;">ID Pasien</th>
-                                <th  style="width:20%;text-align:center;">Nama Pasien</th>
-                                <th  style="width:10%;text-align:center;">Jenis Kelamin</th>
-                                <th  style="width:15%;text-align:center;">Golongan Darah</th>
-                                <th  style="width:30%;text-align:center;">Alamat</th>
-                                <th  style="width:20%;text-align:center;">No. Telpon</th>
-
-                                <th  style="width:5%"></th>
-                              </tr>
-                            </thead>
-                        ';
-                        // output data of each row
-                        while($row = $result->fetch_assoc()) {
+                    <div class="table-responsive">
+                    <table class="table table-striped b-t b-light">
+                      <thead>
+                        <tr>
+                          <th>Nama Obat</th>
+                          <th>Harga</th>
+                          <th>Deskripsi</th>
+                          <th style="width:30px;"></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <?php
+                        $results = json_decode(read(),true);
+                        foreach($results as $result){
                           echo'
-                            <tbody>
-                              <tr>
-                                <th  style="text-align:center;font-weight:normal">'.$row["id_pasien"].'</th>
-                                <th  style="text-align:center;font-weight:normal">'.$row["nama_pasien"].'</th>
-                                <th  style="text-align:center;font-weight:normal">'.$row["jenis_kelamin"].'</th>
-                                <th  style="text-align:center;font-weight:normal">'.$row["golongan_darah"].'</th>
-                                <th  style="text-align:center;font-weight:normal">'.$row["alamat"].'</th>
-                                <th  style="text-align:center;font-weight:normal">'.$row["no_telp"].'</th>
-                                <th  style="font-weight:normal;"><button class = "btn m-b-sm m-r-sm btn-success btn-sm"><a href="formpasien.php?id_pasien='. $row["id_pasien"].'">Edit</a></button></th>
-                              </tr>
-                            </tbody>
-                          ';
+                          <tr>
+                            <td>'.$result['nama_obat'].'</td>
+                            <td>'.$result['harga_obat'].'</td>
+                            <td>'.$result['deskripsi'].'</td>
+                            <td><button class = "btn m-b-sm m-r-sm btn-success btn-sm"><a href="formobat.php?id_obat='. $result["id_obat"].'">Edit</a></button></td>
+                          </tr>';
                         }
-                        echo'
-                          </table>
-                        ';
-                      } else {
-                        echo "Data tidak ditemukan";
-                      }
-                    ?>
+                        ?>
+                      </tbody>
+                    </table>
+                  </div>
                   </div>
                   </div>
                 </div>
@@ -158,7 +138,6 @@
           </div>
         </div>
       </div>
-    </div>
   </div>
 <!-- /content -->
 <!-- KONTEN DI SINI!!-->

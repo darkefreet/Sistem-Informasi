@@ -1,12 +1,12 @@
 <?php
-  include "controller/rekam_medis.php";
+  include "controller/obat.php";
 
-  $id_pasien = isset($_GET['id_pasien']) ? $_GET['id_pasien'] : '';
+  $id_obat = isset($_GET['id_obat']) ? $_GET['id_obat'] : '';
 
-  $data = $id_pasien != '' ? readPasien($id_pasien) : array();
-  $data['nama_pasien'] = !isset($data['nama_pasien']) ? '' : $data['nama_pasien'];
-  $data['alamat'] = !isset($data['alamat']) ? '' : $data['alamat'];
-  $data['no_telp'] = !isset($data['no_telp']) ? '' : $data['no_telp'];
+  $data = $id_obat != '' ? readObat($id_obat) : array();
+  $data['nama_obat'] = !isset($data['nama_obat']) ? '' : $data['nama_obat'];
+  $data['harga'] = !isset($data['harga']) ? '' : $data['harga'];
+  $data['deskripsi'] = !isset($data['deskripsi']) ? '' : $data['deskripsi'];
 ?>
 
 <!DOCTYPE html>
@@ -45,13 +45,13 @@
                   <span class="font-bold">Home</span>
                 </a>               
               </li>
-              <li class="active">
+              <li>
                 <a href="daftarpasien.php" class="text-dark-grey" >      
                   <i class="icon-bdg_dashboard icon-grey"></i>
                   <span class="font-bold">Daftar Pasien</span>
                 </a>               
               </li>
-              <li>
+              <li class="active">
                 <a href="daftarobat.php" class="text-dark-grey" >      
                   <i class="icon-bdg_dashboard icon-grey"></i>
                   <span class="font-bold">Daftar Obat</span>
@@ -78,12 +78,12 @@
                   <i class="icon-bdg_expand2 text-active"></i>
                 </a>   </li>
                 <li><a href>Home</a></li>
-                <li><i class="fa fa-angle-right"></i><a href>Form Pendaftaran Pasien</a></li>
+                <li><i class="fa fa-angle-right"></i><a href>Form Data Obat</a></li>
               </ul>
           </div>
 
           <div class="bg-light lter b-b wrapper-md padder-md">
-            <h1 class="m-n font-bold h4 padder">Form Pendaftaran Pasien</h1>
+            <h1 class="m-n font-bold h4 padder">Form Data Obat</h1>
           </div>      
       <!-- App-content-body -->  
 
@@ -93,66 +93,26 @@
 <div class="wrapper-lg bg-light" ng-controller="FormDemoCtrl">
   <div class="panel panel-default">
     <div class="panel-body">
-      <form action="daftarpasien.php" class="form-horizontal" method="post">        
+      <form action="daftarobat.php" class="form-horizontal" method="post">        
         <div class="form-group">
-          <input type="hidden" name="IdPasien" value="<?php echo $id_pasien ?>">
-          <label  class="col-sm-2 control-label" for="input-id-1">Nama Pasien</label>
+          <input type="hidden" name="id" value="<?php echo $id_obat ?>">
+          <label  class="col-sm-2 control-label" for="input-id-1">Nama Obat</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" name="NamaPasien" value="<?php echo $data['nama_pasien']?>" required>
+            <input type="text" class="form-control" name="nama" value="<?php echo $data['nama_obat']?>" required>
           </div>
         </div>
         <div class="line line-dashed b-b line-lg pull-in"></div>
         <div class="form-group">
-          <label class="col-sm-2 control-label">Jenis Kelamin</label>
+          <label  class="col-sm-2 control-label" for="input-id-1">Harga</label>
           <div class="col-sm-10">
-            <div class="radio" >
-              <label style="margin-right:15px">
-                <input type="radio" id="optionsRadios1" name="JenisKelamin" value="L" required>
-                Laki-laki     
-              </label>
-              <label>
-                <input type="radio" id="optionsRadios2" name="JenisKelamin" value="P">
-                Perempuan
-              </label>
-            </div>
-          </div>
-        </div>
-        <div class="line line-dashed b-b line-lg pull-in"></div>
-        <div class="form-group">
-          <label class="col-sm-2 control-label">Golongan Darah</label>
-          <div class="col-sm-10">
-            <div class="radio" >
-              <label style="margin-right:15px">
-                <input type="radio" id="optionsRadios1" name="GolonganDarah" value="A" required>
-                A
-              </label>
-              <label style="margin-right:15px">
-                <input type="radio" id="optionsRadios2" name="GolonganDarah" value="B">
-                B
-              </label>
-               <label style="margin-right:15px">
-                <input type="radio" id="optionsRadios3" name="GolonganDarah" value="AB">
-                AB
-              </label>
-               <label>
-                <input type="radio" id="optionsRadios4" name="GolonganDarah" value="O">
-                O
-              </label>
-            </div>
-          </div>
-        </div>
-        <div class="line line-dashed b-b line-lg pull-in"></div>
-        <div class="form-group">
-          <label  class="col-sm-2 control-label" for="input-id-1">Alamat</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" name="Alamat" value="<?php echo $data['alamat'] ?>" required>
+            <input type="text" class="form-control" name="harga" value="<?php echo $data['harga_obat'] ?>" required>
           </div>
         </div>
          <div class="line line-dashed b-b line-lg pull-in"></div>
         <div class="form-group">
-          <label  class="col-sm-2 control-label" for="input-id-1">No. Telpon</label>
+          <label  class="col-sm-2 control-label" for="input-id-1">Deskripsi</label>
           <div class="col-sm-10">
-            <input type="text" class="form-control" name="NoTelpon" value="<?php echo $data['no_telp'] ?>" required>
+            <textarea class="form-control" name="deskripsi"><?php echo $data['deskripsi'] ?></textarea>
           </div>
         </div>
         <div class="line line-dashed b-b line-lg pull-in"></div>

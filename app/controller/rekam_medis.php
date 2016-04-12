@@ -5,6 +5,7 @@
 
 
 	function read(){
+		global $conn;
 		$sql = "SELECT * FROM `pengobatan`";
 		$results = mysqli_query($conn,$sql);
 		$rows = array();
