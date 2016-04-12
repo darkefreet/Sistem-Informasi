@@ -5,7 +5,7 @@
 
   $data = $id_obat != '' ? readObat($id_obat) : array();
   $data['nama_obat'] = !isset($data['nama_obat']) ? '' : $data['nama_obat'];
-  $data['harga'] = !isset($data['harga']) ? '' : $data['harga'];
+  $data['harga_obat'] = !isset($data['harga_obat']) ? '' : $data['harga_obat'];
   $data['deskripsi'] = !isset($data['deskripsi']) ? '' : $data['deskripsi'];
 ?>
 

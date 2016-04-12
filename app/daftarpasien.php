@@ -91,21 +91,28 @@
                     Pasien
                   </div>
                   <div class="panel-body">
-                  <form>
-                    Search: 
-                    <input type="text" name="search" class= "input-sm form-control w-sm inline v-middle"placeholder="Ketik disini">
-                    <select name="jenis" class="input-sm form-control w-sm inline v-middle">
-                      <option value="nama_pasien">Nama Pasien</option>
-                      <option value="id_pasien">ID Pasien</option>
-                      <option value="golongan_darah">Golongan Darah</option>
-                      <option value="jenis_kelamin">Jenis Kelamin</option>
-                      <option value="alamat">Alamat</option>
-                      <option value="no_telp">No. Telpon</option>
-                    </select>
-                    <button class= "btn btn-sm btn-default">Go</button>
-                  </form> 
+                    <div class="col-sm-10">
+                      <form>
+                        Search: 
+                        <input type="text" name="search" class= "input-sm form-control w-sm inline v-middle"placeholder="Ketik disini">
+                        <select name="jenis" class="input-sm form-control w-sm inline v-middle">
+                          <option value="nama_pasien">Nama Pasien</option>
+                          <option value="id_pasien">ID Pasien</option>
+                          <option value="golongan_darah">Golongan Darah</option>
+                          <option value="jenis_kelamin">Jenis Kelamin</option>
+                          <option value="alamat">Alamat</option>
+                          <option value="no_telp">No. Telpon</option>
+                        </select>
+                        <button class= "btn btn-sm btn-default">Go</button>
+                      </form> 
+                    </div>
+                    <div class="col-sm-2">
+                    <a href = "formpasien.php">
+                      <button class = "btn m-b-sm m-r-sm btn-success btn-sm"><i class = "m-r-xs fa fa-plus"></i>
+                        Add Pasien</button></a>
+                    </div>
                   <br>
-                    <div class="table-responsive">
+                    <div class="col-sm-12 table-responsive">
                     
                     <?php
                       $result = getPasien();

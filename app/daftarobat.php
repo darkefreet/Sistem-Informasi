@@ -89,22 +89,29 @@
               <div class="col-md-12">
                 <div class="panel panel-default">
                   <div class="panel-heading font-semibold">
-                    Obat
+                      Obat
                   </div>
                   <div class="panel-body">
-                  <form>
-                    Search: 
-                    <input type="text" name="search" class= "input-sm form-control w-sm inline v-middle"placeholder="Ketik disini">
-                    <select name="jenis" class="input-sm form-control w-sm inline v-middle">
-                      <option value="nama_obat">Nama Obat</option>
-                      <option value="harga_obat">Harga</option>
-                      <option value="deskripsi">Deskripsi</option>
-                    </select>
-                    <button class= "btn btn-sm btn-default">Go</button>
-                  </form> 
+                  <div class="col-sm-10">
+                    <form>
+                      Search: 
+                      <input type="text" name="search" class= "input-sm form-control w-sm inline v-middle"placeholder="Ketik disini">
+                      <select name="jenis" class="input-sm form-control w-sm inline v-middle">
+                        <option value="nama_obat">Nama Obat</option>
+                        <option value="harga_obat">Harga</option>
+                        <option value="deskripsi">Deskripsi</option>
+                      </select>
+                      <button class= "btn btn-sm btn-default">Go</button>
+                    </form> 
+                  </div>
+                  <div class="col-sm-2">
+                    <a href = "formobat.php">
+                      <button class = "btn m-b-sm m-r-sm btn-success btn-sm"><i class = "m-r-xs fa fa-plus"></i>
+                        Add Obat</button></a>
+                    </div>
                   <br>
                     
-                    <div class="table-responsive">
+                    <div class=" col-sm-12 table-responsive">
                     <table class="table table-striped b-t b-light">
                       <thead>
                         <tr>
