@@ -5,7 +5,7 @@
 
 	function read(){
 		global $conn;
-		$sql = "SELECT * FROM `obat`";
+		$sql = "SELECT * FROM `obat` ORDER BY `nama_obat`";
 		$results = mysqli_query($conn,$sql);
 		$rows = array();
 		while($r = mysqli_fetch_assoc($results)){

@@ -1,5 +1,9 @@
 <?php 
-  include "controller/obat.php";
+  include "controller/rekam_medis.php";
+
+  if (!empty($_POST)) {
+      postPasien($_POST);
+  }
 ?>
 
 <!DOCTYPE html>
@@ -11,6 +15,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <link rel="stylesheet" href="../libs/assets/animate.css/animate.css" type="text/css" />
   <link rel="stylesheet" href="../libs/assets/font-awesome/css/font-awesome.min.css" type="text/css" />
+  <link rel="stylesheet" href="../libs/assets/simple-line-icons/css/simple-line-icons.css" type="text/css" />
   <link rel="stylesheet" href="../libs/jquery/bootstrap/dist/css/bootstrap.css" type="text/css" />
   <link rel="stylesheet" href="css/font.css" type="text/css" />
   <link rel="stylesheet" href="css/style.css" type="text/css" />
@@ -70,64 +75,77 @@
                   <i class="icon-bdg_expand2 text-active"></i>
                 </a>   </li>
                 <li><a href>Home</a></li>                
-                <li class="active"><i class="fa fa-angle-right"></i>Transaksi Obat</li>
+                <li class="active"><i class="fa fa-angle-right"></i>Riwayat Transaksi</li>
               </ul>
           </div>
 
           <div class="bg-light lter b-b wrapper-md padder-md">
-            <h1 class="m-n font-semibold h4 text-grey padder">Transaksi Obat</h1>
+            <h1 class="m-n font-semibold h4 text-grey padder">Riwayat Transaksi</h1>
           </div>
 
           <div class="wrapper-lg">
             <div class="row">
               <div class="col-md-12">
                 <div class="panel panel-default">
-                  <div class="controls" id="profs"> 
-                      <div class="container">
-                          <div class="control-group" id="fields"> 
-                            <div class="controls">
-                              <form action="pembayaran.php" role="form" autocomplete="off" method = "post"> 
-                                <div class="row">
-                                  <div class ="col-md-1">
-                                    <h1 class="m-n font-semibold h6 text-grey padder" style="position: relative; transform: translateY(50%)">ID Pasien: </h1>
-                                  </div>
-                                  <div class="col-sm-2">
-                                    <input class="form-control" name="id_pasien" type="text" placeholder="ID Pasien" style="margin-left: 10px; margin-top: 10px"/>
-                                  </div>
-                                </div>
-                                <div class="entry input-group" style="margin-left: 10px; margin-top: 10px">
-                                  <div class="row">
-                                    <div class="col-md-4">
-                                      <select class="form-control" name="id_obat[]">
-                                        <option value="">Nama Obat</option>
-                                        <?php
-                                          $daftarObat = json_decode(read(),true);
-                                          foreach ($daftarObat as $obat) {
-                                            echo '<option value="'. $obat["id_obat"] . '">' . $obat['nama_obat'] . '</option>';
-                                          }
-                                        ?>
-                                      </select>
-                                    </div>
-                                    <div class="col-md-3">
-                                      <input class="form-control" name="jumlah[]" type="text" placeholder="jumlah" />
-                                    </div>
-                                    <div class="col-md-3">
-                                      <button class="btn btn-success btn-add" type="button"> 
-                                        Tambah Item 
-                                      </button> 
-                                    </div>
-                                  </div>
-                                </div> 
-                            </div> 
-                            </div> 
-                      </div>
-                      <br>
+                  <div class="panel-heading font-semibold">
+                    Pasien
+                  </div>
+                  <div class="panel-body">
+                    <div class="col-sm-10">
+                      <form>
+                        Search: 
+                        <input type="text" name="search" class= "input-sm form-control w-sm inline v-middle"placeholder="Ketik disini">
+                        <select name="jenis" class="input-sm form-control w-sm inline v-middle">
+                          <option value="id_pasien">ID Transaksi</option>
+                          <option value="golongan_darah">ID Pasien</option>
+                          <option value="jenis_kelamin">Total Harga</option>
+                          <option value="alamat">Tanggal Transaksi</option>
+                        </select>
+                        <button class= "btn btn-sm btn-default">Go</button>
+                      </form> 
+                    </div>
+                    <div class="col-sm-2">
+                    <a href = "formpasien.php">
+                      </a>
+                    </div>
+                  <br>
+                    <div class="col-sm-12 table-responsive">
+                    <table class="table table-striped b-t b-b">
+                      <thead>
+                        <tr>
+                          <th>ID Transaksi</th>
+                          <th>ID Pasien</th>
+                          <th>Total Harga</th>
+                          <th>Tanggal Transaksi</th>
+
+                          <th style="width:3%"></th>
+                          <th style="width:3%"></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+
+                        <tr>
+                          <td>1000001</td>
+                          <td>101</td>
+                          <td>Rp100000</td>
+                          <td>2016/04/15</td>
+                          <td><button class = "btn m-b-sm m-r-sm btn-info btn-sm"><a href="riwayatpasien.php?id_pasien='. $row["id_pasien"].'">Detail</a></button></td>
+                        </tr>
+                        <tr>
+                          <td>1000002</td>
+                          <td>102</td>
+                          <td>Rp250000</td>
+                          <td>2016/04/15</td>
+                          <td><button class = "btn m-b-sm m-r-sm btn-info btn-sm"><a href="riwayatpasien.php?id_pasien='. $row["id_pasien"].'">Detail</a></button></td>
+                        </tr>
+                              
+                      </tbody>
+                    </table>
+                  </div>
                   </div>
                 </div>
               </div>
             </div>
-            <input type="submit" class="btn btn-primary" value="Ke Pembayaran">
-          </form> 
           </div>
         </div>
       </div>
@@ -158,7 +176,6 @@
 <script src="js/ui-nav.js"></script>
 <script src="js/ui-toggle.js"></script>
 <script src="js/ui-client.js"></script>
-<script src="js/dynamic-form.js"></script>
 
 </body>
 </html>
