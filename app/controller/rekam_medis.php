@@ -70,4 +70,13 @@
 		return $q;
 	}
 
+	function addRiwayat($data){
+		global $conn;
+		if ($data['id'] != '')
+		{
+			$max = "SELECT max(id_rekam) as max from pengobatan where id_pasien = '$data[id]'";
+			$q = mysqli_query($conn,$max);
+		}
+	}
+
 ?>

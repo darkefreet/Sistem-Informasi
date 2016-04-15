@@ -1,9 +1,5 @@
-<?php 
-  include "controller/rekam_medis.php";
+<?php
   $id_pasien = isset($_GET['id_pasien']) ? $_GET['id_pasien'] : '';
-  if (!empty($_POST)) {
-      addRiwayat($_POST);
-  }
 ?>
 
 <!DOCTYPE html>
@@ -63,91 +59,78 @@
   <!-- / aside -->
 
 <!-- content -->
-  <div id="content" class="app-content" role="main">
-    <div class="hbox hbox-auto-xs hbox-auto-sm ng-scope">
+<div id="content" class="app-content" role="main">
+
+  <div class="hbox hbox-auto-xs hbox-auto-sm ng-scope">
       <div class="col">
-        <div class="app-content-body ">
 
           <div class="bg-light lter">    
               <ul class="breadcrumb bg-grey-breadcrumb m-b-none">
                 <li><a href="#" class="btn no-shadow" ui-toggle-class="app-aside-folded" target=".app">
-                  <i class="icon-bdg_expand1 text"></i>
+                   <i class="icon-bdg_expand1 text"></i>
                   <i class="icon-bdg_expand2 text-active"></i>
                 </a>   </li>
-                <li><a href>Home</a></li>                
-                <li class="active"><i class="fa fa-angle-right"></i>Riwayat Pasien</li>
+                <li><a href>Home</a></li>
+                <li><i class="fa fa-angle-right"></i><a href>Form Pengobatan</a></li>
               </ul>
           </div>
 
           <div class="bg-light lter b-b wrapper-md padder-md">
-            <h1 class="m-n font-semibold h4 text-grey padder">Riwayat Pasien</h1>
-          </div>
+            <h1 class="m-n font-bold h4 padder">Form Pengobatan</h1>
+          </div>      
+      <!-- App-content-body -->  
 
-          <?php  $result = readPasien($id_pasien); ?>
-          <div class="wrapper-lg">
-            <div class="col-sm-10"></div>
-            <div class="col-sm-2">
-              <a href = "<?php echo 'formriwayat.php?id_pasien='.$id_pasien?>">
-                <button class = "btn m-b-sm m-r-sm btn-success btn-sm"><i class = "m-r-xs fa fa-plus"></i>
-                  Add Riwayat</button></a>
-              </div>
-            <div class="row">
-              <div class="col-md-12">
-                <div class="panel panel-default">
-                  <div class="panel-heading font-semibold">
-                      Nama : <?php echo $result['nama_pasien']?></br>
-                      Jenis Kelamin : <?php echo $result['jenis_kelamin']?></br>
-                      Golongan Darah : <?php echo $result['golongan_darah']?></br>
-                      Alamat : <?php echo $result['alamat']?></br>
-                      No. Telpon : <?php echo $result['no_telp']?></br>
-                  </div>
-                  <div class="panel-body">
-                    <div class="col-sm-12 table-responsive">
-                    <table class="table table-striped b-t b-b">
-                      <thead>
-                        <tr>
-                          <th>No</th>
-                          <th>Nama Dokter</th>
-                          <th>Keluhan</th>
-                          <th>Pengobatan</th>
-                          <th>Tanggal Berobat</th>
-                          <th>Honor</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <?php
-                          $results = json_decode(read($id_pasien),true);
-                          if($results){
-                            foreach ($results as $row) {
-                            echo'
-                              <tr>
-                                <td>'.$row["id_rekam"].'</td>
-                                <td>'.$row["dokter"].'</td>
-                                <td>'.$row["keluhan"].'</td>
-                                <td>'.$row["namaPengobatan"].'</td>
-                                <td>'.$row["tanggal"].'</td>
-                                <td>'.$row["honor"].'</td>
-                              </tr>
-                              ';
-                          }
-                          }
-                          
-                        ?>
-                      </tbody>
-                    </table>
-                  </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+<div class="wrapper-lg bg-light" ng-controller="FormDemoCtrl">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <form action="<?php echo 'riwayatpasien.php?id_pasien='.$id_pasien?>" class="form-horizontal" method="post">        
+        <div class="form-group">
+          <input type="hidden" name="id" value="<?php echo $id_pasien ?>">
+          <label  class="col-sm-2 control-label" for="input-id-1">Nama Dokter</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" name="dokter" required>
           </div>
         </div>
-      </div>
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+
+        <div class="form-group">
+          <label  class="col-sm-2 control-label" for="input-id-1">Keluhan</label>
+          <div class="col-sm-10">
+            <textarea class="form-control" name="keluhan"></textarea>
+          </div>
+        </div>
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+
+        <div class="form-group">
+          <label  class="col-sm-2 control-label" for="input-id-1">Nama Pengobatan</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" name="namaPengobatan" required>
+          </div>
+        </div>
+         <div class="line line-dashed b-b line-lg pull-in"></div>
+
+         <div class="form-group">
+          <label  class="col-sm-2 control-label" for="input-id-1">Honor</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" name="honor" required>
+          </div>
+        </div>
+         <div class="line line-dashed b-b line-lg pull-in"></div>
+        
+        <div class="form-group">
+          <div class="col-sm-4 col-sm-offset-2">
+            <button type="submit" class="btn btn-info">Submit</button>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
-<!-- /content -->
-<!-- KONTEN DI SINI!!-->
-             
+</div>
+
+  </div>
+    <!-- end hbox hbox-auto-xs -->
+</div>
+
 
    <!-- footer -->
   <footer id="footer" class="app-footer" role="footer">
@@ -173,3 +156,4 @@
 
 </body>
 </html>
+
