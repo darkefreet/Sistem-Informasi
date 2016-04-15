@@ -75,7 +75,13 @@
 		if ($data['id'] != '')
 		{
 			$max = "SELECT max(id_rekam) as max from pengobatan where id_pasien = '$data[id]'";
-			$q = mysqli_query($conn,$max);
+			$results = mysqli_query($conn,$max);
+			foreach($results as $result)
+				$id_now = $result['max']+1;
+
+			$pasien = "INSERT INTO pengobatan (id_pasien, id_rekam, dokter, keluhan, namaPengobatan,honor)
+				VALUES ('$data[id]','$id_now', '$data[dokter]', '$data[keluhan]','$data[namaPengobatan]', '$data[honor]')";
+			$q = mysqli_query($conn, $pasien);
 		}
 	}
 
