@@ -1,7 +1,7 @@
 <?php
 
 	include "controller/config.php";
-	$conn = connect_database();   
+	$conn = connect_database();
 
 	function read($id){
 		global $conn;
@@ -41,6 +41,32 @@
         return $result;
 	}
 	
+	function getTransaksi(){
+		global $conn;
+
+		$sql = "SELECT * FROM `pembelian_obat`";
+		$results = mysqli_query($conn,$sql);
+		$rows = array();
+		
+		while($r = mysqli_fetch_assoc($results)){
+			$rows[]=$r;
+		}
+		return json_encode($rows);
+	}
+
+	function getItems($transaksiId){
+		global $conn;
+
+		$sql = "SELECT * FROM `item_pembelian` WHERE id_pembelian=$transaksiId";
+		$results = mysqli_query($conn,$sql);
+		$rows = array();
+		
+		while($r = mysqli_fetch_assoc($results)){
+			$rows[]=$r;
+		}
+		return json_encode($rows);
+	}
+
 	function saveTransaksi($id_pasien, $id_obat, $jumlah){
 		global $conn;
 

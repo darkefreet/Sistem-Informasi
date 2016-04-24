@@ -1,9 +1,6 @@
 <?php 
-  include "controller/rekam_medis.php";
-
-  if (!empty($_POST)) {
-      postPasien($_POST);
-  }
+  include "controller/transaksi.php";
+  $listTransaksi = json_decode(getTransaksi(), true);
 ?>
 
 <!DOCTYPE html>
@@ -36,7 +33,7 @@
               <li class="hidden-folded m-t text-dark-grey text-xs padder-md padder-v-sm">
                 <span>Navigation</span>
               </li>
-              <li class="active">
+              <li>
                 <a href="index.php" class="text-dark-grey" >      
                   <i class="icon-bdg_dashboard icon-grey"></i>
                   <span class="font-bold">Home</span>
@@ -52,8 +49,14 @@
                 <a href="daftarobat.php" class="text-dark-grey" >      
                   <i class="icon-bdg_dashboard icon-grey"></i>
                   <span class="font-bold">Daftar Obat</span>
-                </a>               
+                </a>              
               </li>
+              <li class="active">
+                <a href="daftarobat.php" class="text-dark-grey" >      
+                  <i class="icon-bdg_dashboard icon-grey"></i>
+                  <span class="font-bold">Daftar Transaksi</span>
+                </a>
+              </li> 
             </ul>
           </nav>
           <!-- nav -->
@@ -99,7 +102,7 @@
                           <option value="id_pasien">ID Transaksi</option>
                           <option value="golongan_darah">ID Pasien</option>
                           <option value="jenis_kelamin">Total Harga</option>
-                          <option value="alamat">Tanggal Transaksi</option>
+                          <option value="alamat">Waktu Transaksi</option>
                         </select>
                         <button class= "btn btn-sm btn-default">Go</button>
                       </form> 
@@ -123,22 +126,15 @@
                         </tr>
                       </thead>
                       <tbody>
-
-                        <tr>
-                          <td>1000001</td>
-                          <td>101</td>
-                          <td>Rp100000</td>
-                          <td>2016/04/15</td>
-                          <td><button class = "btn m-b-sm m-r-sm btn-info btn-sm"><a href="riwayatpasien.php?id_pasien='. $row["id_pasien"].'">Detail</a></button></td>
-                        </tr>
-                        <tr>
-                          <td>1000002</td>
-                          <td>102</td>
-                          <td>Rp250000</td>
-                          <td>2016/04/15</td>
-                          <td><button class = "btn m-b-sm m-r-sm btn-info btn-sm"><a href="riwayatpasien.php?id_pasien='. $row["id_pasien"].'">Detail</a></button></td>
-                        </tr>
-                              
+                        <?php foreach($listTransaksi as $transaksi): ?>
+                          <tr>
+                            <td><?php echo $transaksi["id_pembelian"] ?></td>
+                            <td><?php echo $transaksi["id_pasien"] ?></td>
+                            <td>Rp100000</td>
+                            <td><?php echo $transaksi["tanggal"] ?></td>
+                            <td><button class = "btn m-b-sm m-r-sm btn-info btn-sm"><a href="detailtransaksi.php?id_pembelian=<?=$transaksi["id_pembelian"]?>">Detail</a></button></td>
+                          </tr>
+                        <?php endforeach; ?>    
                       </tbody>
                     </table>
                   </div>

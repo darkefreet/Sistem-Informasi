@@ -51,6 +51,12 @@
                   <span class="font-bold">Daftar Obat</span>
                 </a>               
               </li>
+               <li>
+                <a href="riwayattransaksi.php" class="text-dark-grey" >      
+                  <i class="icon-bdg_dashboard icon-grey"></i>
+                  <span class="font-bold">Daftar Transaksi</span>
+                </a>
+              </li>
             </ul>
           </nav>
           <!-- nav -->

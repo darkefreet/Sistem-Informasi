@@ -1,6 +1,7 @@
 <?php 
-  include "controller/rekam_medis.php";
-  $id_pasien = isset($_GET['id_pasien']) ? $_GET['id_pasien'] : '';
+  include "controller/transaksi.php";
+  $id_pembelian = $_GET['id_pembelian'];
+  $items = json_decode(getItems($id_pembelian), true);
 ?>
 
 <!DOCTYPE html>
@@ -39,7 +40,7 @@
                   <span class="font-bold">Home</span>
                 </a>               
               </li>
-              <li class="active">
+              <li>
                 <a href="daftarpasien.php" class="text-dark-grey" >      
                   <i class="icon-bdg_dashboard icon-grey"></i>
                   <span class="font-bold">Daftar Pasien</span>
@@ -50,6 +51,12 @@
                   <i class="icon-bdg_dashboard icon-grey"></i>
                   <span class="font-bold">Daftar Obat</span>
                 </a>               
+              </li>
+              <li class="active">
+                <a href="riwayattransaksi.php" class="text-dark-grey" >      
+                  <i class="icon-bdg_dashboard icon-grey"></i>
+                  <span class="font-bold">Daftar Transaksi</span>
+                </a>
               </li>
             </ul>
           </nav>
@@ -77,14 +84,21 @@
           </div>
 
           <div class="bg-light lter b-b wrapper-md padder-md">
-            <h1 class="m-n font-semibold h4 text-grey padder">Detail Transaksi #1000001</h1>
+            <h1 class="m-n font-semibold h4 text-grey padder">Detail Transaksi #<?php echo $id_pembelian?></h1>
           </div>
           <div class="wrapper-lg">
             <div class="row">
               <div class="col-md-12">
                 <div class="panel panel-default">
                   <div class="panel-heading font-semibold">
-                    Nama Pasien : Budi</br>
+                    <?php 
+                      $query = "SELECT * FROM `pembelian_obat` WHERE id_pembelian=" . $id_pembelian;
+                      $rq = mysqli_query($conn, $query);
+                      $item_pembelian = mysqli_fetch_array($rq, MYSQLI_ASSOC);
+                      $id_pasien = $item_pembelian["id_pasien"];
+                      $nama_pasien = readPasien($id_pasien)["nama_pasien"];
+                    ?>
+                    Nama Pasien : <?php echo $nama_pasien ?></br>
                   </div>
                   <div class="panel-body">
                     <div class="col-sm-12 table-responsive">
@@ -99,20 +113,21 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>1</td>
-                          <td>Obat 1</td>
-                          <td>2</td>
-                          <td>Rp1000 </td>
-                          <td>Rp2000</td>
-                        </tr>
-                        <tr>
-                          <td>2</td>
-                          <td>Obat 2</td>
-                          <td>3</td>
-                          <td>Rp1500 </td>
-                          <td>Rp4500</td>
-                        </tr>
+                        <?php $number = 1 ?>
+                        <?php foreach ($items as $item): ?>
+                          <?php 
+                            $query = "SELECT * FROM `obat` WHERE id_obat=" . $item['id_obat'];
+                            $rq = mysqli_query($conn, $query);
+                            $obat = mysqli_fetch_array($rq, MYSQLI_ASSOC);
+                          ?>                     
+                          <tr>
+                            <td><?php echo $number++; ?></td>
+                            <td><?php echo $obat["nama_obat"] ?></td>
+                            <td>2</td>
+                            <td>Rp1000 </td>
+                            <td>Rp2000</td>
+                          </tr>
+                        <?php endforeach; ?>
                       </tbody>
                     </table>
                     Total: Rp6500
