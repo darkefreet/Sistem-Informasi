@@ -42,21 +42,28 @@
 	}
 	
 	function saveTransaksi($id_pasien, $id_obat, $jumlah){
+		global $conn;
+
 		// Create record di tabel pembelian_obat dulu
 		$query = 'INSERT INTO pembelian_obat(id_pasien)
-					VALUES ($id_pasien)';
+					VALUES ('. $id_pasien. ')';
+
 		$pembelian_obat = mysqli_query($conn, $query);
-		$id_pembelian = $pembelian_obat["id_pembelian"];
+		
+		$id_pembelian = $conn->insert_id;
 
 		// Untuk setiap obat, create item_pembelian
 		$i=0;
 		foreach ($id_obat as $id) {
 			$query = 'INSERT INTO item_pembelian(id_pembelian, id_obat, jumlah)
-					VALUES ($id_pembelian, $id, $jumlah[$i])';
+					VALUES (' . $id_pembelian . ',' . $id . ','. $jumlah[$i] . ')';
 			$i++;
-			mysqli_query(conn, $query);
+
+			mysqli_query($conn, $query);
 		}
-		
+
+		header("Location: riwayattransaksi.php");
+		die();
 	}
 
 ?>
