@@ -122,15 +122,15 @@
                           ?>                     
                           <tr>
                             <td><?php echo $number++; ?></td>
-                            <td><?php echo $obat["nama_obat"] ?></td>
-                            <td>2</td>
+                            <td><?php echo $obat["nama_obat"]; ?></td>
+                            <td><?php echo $item["jumlah"]; ?></td>
                             <td>Rp1000 </td>
-                            <td>Rp2000</td>
+                            <td>Rp<?php echo $item["jumlah"]*1000; ?></td>
                           </tr>
                         <?php endforeach; ?>
                       </tbody>
                     </table>
-                    Total: Rp6500
+                    Total: Rp<?php echo countNumbers($id_pembelian)*1000; ?>
                   </div>
                   </div>
                 </div>

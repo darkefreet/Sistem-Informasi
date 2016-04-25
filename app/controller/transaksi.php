@@ -67,6 +67,16 @@
 		return json_encode($rows);
 	}
 
+	function countNumbers($transaksiId){
+		global $conn;
+
+		$item_pembelian = "SELECT SUM(jumlah) FROM item_pembelian WHERE id_pembelian=$transaksiId";
+		$rq = mysqli_query($conn, $item_pembelian);
+
+		$row = mysqli_fetch_array($rq, MYSQLI_ASSOC);
+		return $row["SUM(jumlah)"];
+	}
+
 	function saveTransaksi($id_pasien, $id_obat, $jumlah){
 		global $conn;
 

@@ -130,7 +130,7 @@
                           <tr>
                             <td><?php echo $transaksi["id_pembelian"] ?></td>
                             <td><?php echo $transaksi["id_pasien"] ?></td>
-                            <td>Rp100000</td>
+                            <td>Rp<?php echo countNumbers($transaksi["id_pembelian"]) * 1000; ?></td>
                             <td><?php echo $transaksi["tanggal"] ?></td>
                             <td><button class = "btn m-b-sm m-r-sm btn-info btn-sm"><a href="detailtransaksi.php?id_pembelian=<?=$transaksi["id_pembelian"]?>">Detail</a></button></td>
                           </tr>
